@@ -37,6 +37,13 @@
   "lint-staged": {
     "src/**/*.js": "eslint"
   },
+  "importSort": {
+    ".js, .jsx, .es6, .es": {
+      "parser": "babylon",
+      "style": "module",
+      "options": {}
+    }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -1,23 +1,29 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './TripListOptions.module.scss';
+import React from 'react';
+import {Col, Row} from 'react-flexbox-grid';
 
-import {Row, Col} from 'react-flexbox-grid';
+import styles from './TripListOptions.module.scss';
 
 class TripListOptions extends React.Component {
   handleTags(tag, checked){
     if(checked) {
-      console.log('Adding tag', tag);
-      // TODO - use action dispatcher from props
-    } else {
-      console.log('Removing tag', tag);
-      // TODO - use action dispatcher from props
+      this.props.addTag(tag);
+    } 
+    else {
+      this.props.removeTag(tag);
     }
   }
 
-  handleDuration(type, value){
-    console.log('Changing duration', type, value);
-    // TODO - use action dispatcher from props
+  handleDuration(type, value){    
+    const daysNum = parseInt(value);
+    if(type === 'from' && daysNum <= this.props.filters.duration.to) {
+      this.props.changeDuration({from: daysNum, to: this.props.filters.duration.to});
+    }
+    else if (type === 'to' && daysNum >= this.props.filters.duration.from) {
+      this.props.changeDuration({from: this.props.filters.duration.from, to: daysNum});
+    }
+    //this.props[`changeDuration${type}`](daysNum); // A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.
+    //this.setState({props: {[`changeDuration${type}`]: daysNum}}); //dlaczego to nie działa?
   }
 
   handleSearch(phrase){
@@ -73,6 +79,8 @@ TripListOptions.propTypes = {
   tags: PropTypes.object,
   filters: PropTypes.object,
   changeSearchPhrase: PropTypes.func,
+  changeDurationTo: PropTypes.func,
+  changeDurationFrom: PropTypes.func,
 };
 
 export default TripListOptions;
