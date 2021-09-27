@@ -12,7 +12,6 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const CHANGE_PHRASE = createActionName('CHANGE_PHRASE');
 export const CHANGE_DURATION_TO = createActionName('CHANGE_DURATION_TO'); 
 export const CHANGE_DURATION_FROM = createActionName('CHANGE_DURATION_FROM');
-export const CHANGE_DURATION = createActionName('CHANGE_DURATION');
 export const ADD_TAG = createActionName('ADD_TAG');
 export const REMOVE_TAG = createActionName('REMOVE_TAG');
 
@@ -20,13 +19,12 @@ export const REMOVE_TAG = createActionName('REMOVE_TAG');
 export const changeSearchPhrase = payload => ({ payload, type: CHANGE_PHRASE });
 export const changeDurationTo = payload => ({payload, type: CHANGE_DURATION_TO});
 export const changeDurationFrom = payload => ({payload, type: CHANGE_DURATION_FROM});
-export const changeDuration = payload => ({payload, type: CHANGE_DURATION});
 export const addTag = payload => ({payload, type: ADD_TAG});
 export const removeTag = payload => ({payload, type: REMOVE_TAG});
 
 // reducer
 export default function reducer(statePart = [], action = {}) {
-  const tagsList = statePart.tags;  //czy to jest odpowiednie miejsce dla tej linii?
+  const tagsList = statePart.tags;
  
   switch (action.type) {
     case CHANGE_PHRASE:
@@ -38,22 +36,16 @@ export default function reducer(statePart = [], action = {}) {
       return {
         ...statePart,
         duration: {
-          from: action.payload, //nowy stan traci 'to', jak go zachować?
+          ...statePart.duration,
+          from: action.payload,
         },
       };
     case CHANGE_DURATION_TO:
       return {
         ...statePart,
         duration: {
-          to: action.payload, //nowy stan traci 'from', jak go zachować?
-        },
-      };
-    case CHANGE_DURATION:       
-      return {
-        ...statePart,
-        duration: {
-          from: action.payload['from'],
-          to: action.payload['to'],
+          ...statePart.duration,
+          to: action.payload,
         },
       };
     case ADD_TAG: 

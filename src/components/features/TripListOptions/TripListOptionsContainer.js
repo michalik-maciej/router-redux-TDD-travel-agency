@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import {addTag, changeDuration, changeDurationFrom, changeDurationTo, changeSearchPhrase, getAllFilters, removeTag} from '../../../redux/filtersRedux';
+import {addTag, changeDurationFrom, changeDurationTo, changeSearchPhrase, getAllFilters, removeTag} from '../../../redux/filtersRedux';
 import {getAllTags} from '../../../redux/tagsRedux';
 import TripListOptions from './TripListOptions';
 
@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changeSearchPhrase: phrase => dispatch(changeSearchPhrase(phrase)),
-  changeDuration: daysNum => dispatch(changeDuration(daysNum)),
   changeDurationFrom: daysNum => dispatch(changeDurationFrom(daysNum)),
   changeDurationTo: daysNum => dispatch(changeDurationTo(daysNum)),
   addTag: tag => dispatch(addTag(tag)),

@@ -17,13 +17,11 @@ class TripListOptions extends React.Component {
   handleDuration(type, value){    
     const daysNum = parseInt(value);
     if(type === 'from' && daysNum <= this.props.filters.duration.to) {
-      this.props.changeDuration({from: daysNum, to: this.props.filters.duration.to});
+      this.props.changeDurationFrom(daysNum);
     }
     else if (type === 'to' && daysNum >= this.props.filters.duration.from) {
-      this.props.changeDuration({from: this.props.filters.duration.from, to: daysNum});
+      this.props.changeDurationTo(daysNum);
     }
-    //this.props[`changeDuration${type}`](daysNum); // A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.
-    //this.setState({props: {[`changeDuration${type}`]: daysNum}}); //dlaczego to nie działa?
   }
 
   handleSearch(phrase){

@@ -23,8 +23,7 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   // DONE - sort by cost descending (most expensive goes first)
   output = output.sort((tripA, tripB) => {
-    const costA = Number(tripA.cost.replace(/[^0-9.]+/g,""));
-    const costB = Number(tripB.cost.replace(/[^0-9.]+/g,""));  //jak się nie powtarzać i podmienić "A" na "B" w pętli?
+    const[costA, costB] = [tripA, tripB].map(trip => Number(trip.cost.replace(/[^0-9.]+/g,"")));
 
     if (costA > costB) {
       return -1;
