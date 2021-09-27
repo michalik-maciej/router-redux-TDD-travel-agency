@@ -1,18 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import {Col, Grid, Row} from 'react-flexbox-grid';
 import HTMLParser from 'react-html-parser';
 
-import NotFound from '../NotFound/NotFound';
-import Section from '../../layout/Section/Section';
-import PageTitle from '../../common/PageTitle/PageTitle';
-import SideImage from '../../common/SideImage/SideImage';
 import DetailsBox from '../../common/DetailsBox/DetailsBox';
 import DetailsImage from '../../common/DetailsImage/DetailsImage';
 import List from '../../common/List/List';
 import ListItem from '../../common/ListItem/ListItem';
-
+import PageTitle from '../../common/PageTitle/PageTitle';
+import SideImage from '../../common/SideImage/SideImage';
+import OrderForm from '../../features/OrderForm/OrderFormContainer';
+import Section from '../../layout/Section/Section';
+import NotFound from '../NotFound/NotFound';
 import styles from './Trip.module.scss';
-import {Grid, Row, Col} from 'react-flexbox-grid';
 
 const Trip = ({error, name, image, cost, days, description, country, intro}) => {
   if(error) return <NotFound />;
@@ -66,6 +66,14 @@ const Trip = ({error, name, image, cost, days, description, country, intro}) => 
           </Row>
         </Grid>
       </DetailsBox>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <PageTitle text='Trip options' />
+            <OrderForm cost={cost} />
+          </Col>
+        </Row>
+      </Grid>
     </Section>
   );
 };

@@ -1,4 +1,6 @@
 export const parseOptionPrice = price => {
+  console.log(price);
+  
   if (typeof (price) === 'number') {
     return { type: 'number', value: price };
   }
