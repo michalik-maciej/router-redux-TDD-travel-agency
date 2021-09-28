@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import pricing from '../data/pricing.json';
 import {parseOptionPrice} from './parseOptionPrice';
 
