@@ -5,8 +5,7 @@ import styles from './OrderOption.module.scss';
 
 const OrderOptionNumber = ({currentValue, limits, price, setOptionValue}) => (
   <div className={styles.inputSmall}>
-    <input 
-      className={styles.inputSmall}
+    <input       
       max={limits.max}
       min={limits.min}
       onChange={event => setOptionValue(event.currentTarget.value)}

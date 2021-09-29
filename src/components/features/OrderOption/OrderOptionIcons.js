@@ -4,7 +4,7 @@ import { formatPrice } from "../../../utils/formatPrice";
 import Icon from '../../common/Icon/Icon';
 import styles from './OrderOption.module.scss';
 
-const OrderOptionIcons = ({values, required, setOptionValue}) => (
+const OrderOptionIcons = ({values, required, currentValue, setOptionValue}) => (
   <div className={styles.component}>
     {required ? '' : (
       <div 
@@ -15,16 +15,16 @@ const OrderOptionIcons = ({values, required, setOptionValue}) => (
         none
       </div>
     )}
-    {values.map( value => (
-      <div 
-      className={styles.icon} //how to set and toggle multiple classes?
-      key={value.id}
-      onClick={() => setOptionValue(value.id)}
+    {values.map( value => {
+      return (<div       
+        key={value.id}
+        className={value.id === currentValue ? styles.iconActive : styles.icon}
+        onClick={() => setOptionValue(value.id)}
       >
         <Icon name={value.icon} />
         {value.name} ({formatPrice(value.price)})
       </div>
-    ))}
+    )})}
   </div>
 );
 

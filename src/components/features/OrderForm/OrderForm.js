@@ -3,14 +3,13 @@ import React from 'react';
 import { Col, Row } from 'react-flexbox-grid';
 
 import pricing from '../../../data/pricing.json';
-import { setOrderOption } from '../../../redux/orderRedux';
 import OrderSummary from './../OrderSummary/OrderSummary';
 import OrderOption from '../OrderOption/OrderOption';
 
-const OrderForm = ({cost, options}) => (
+const OrderForm = ({cost, options, setOrderOption}) => (
   <Row>
     {pricing.map(pricingOption => (
-      <Col md={4}>
+      <Col md={3}>
         <OrderOption 
         key={pricingOption.id} 
         currentValue={options[pricingOption.id]} 

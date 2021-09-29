@@ -14,10 +14,8 @@ export const setOrderOption = payload => ({ payload, type: SET_OPTION });
 
 // reducer
 export default function reducer(statePart = [], action = {}) {
-  console.log('reducer', action);
   switch (action.type) {
     case SET_OPTION:
-      console.log('set option:', action);
       return {
         ...statePart,
         options: {
