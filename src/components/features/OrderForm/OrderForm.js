@@ -6,17 +6,18 @@ import pricing from '../../../data/pricing.json';
 import OrderSummary from './../OrderSummary/OrderSummary';
 import OrderOption from '../OrderOption/OrderOption';
 
-const OrderForm = ({cost, options, setOrderOption}) => (
+const OrderForm = ({ cost, options, setOrderOption }) => (
   <Row>
-    {pricing.map(pricingOption => (
-      <Col md={3}>
-        <OrderOption 
-        key={pricingOption.id} 
-        currentValue={options[pricingOption.id]} 
-        setOrderOption={setOrderOption} 
-        {...pricingOption} />
+    {pricing.map((pricingOption) => (
+      <Col md={3} key={pricingOption.id}>
+        <OrderOption
+          key={pricingOption.id}
+          currentValue={options[pricingOption.id]}
+          setOrderOption={setOrderOption}
+          {...pricingOption}
+        />
       </Col>
-      ))}
+    ))}
     <Col xs={12}>
       <OrderSummary options={options} cost={cost} />
     </Col>

@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 import tripList from '../data/trips.json';
 import filtersReducer from './filtersRedux';
@@ -34,7 +34,7 @@ const reducers = {
 };
 
 // add blank reducers for initial state properties without reducers
-Object.keys(initialState).forEach(item => {
+Object.keys(initialState).forEach((item) => {
   if (typeof reducers[item] == 'undefined') {
     reducers[item] = (statePart = null) => statePart;
   }

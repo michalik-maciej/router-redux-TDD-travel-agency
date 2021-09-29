@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 @import '../../../styles/settings.scss';
 
@@ -28,9 +28,7 @@
         border-bottom: 4px solid $color-primary;
       }
     }
-
   }
-
 }
 
 .logo {
@@ -55,19 +53,16 @@
 }
 
 @media (max-width: 767px) {
-
-  .component  {
+  .component {
     text-align: center;
 
     nav {
       margin-top: ($base-size * 1.5);
     }
-
   }
 
   .contact {
     text-align: center;
     margin-top: ($base-size * 1.5);
   }
-
 }

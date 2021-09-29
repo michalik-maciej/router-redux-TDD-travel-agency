@@ -1,7 +1,7 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Info from './Info';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   title: state.app.title,
 });
 

@@ -1,9 +1,9 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {getFilteredTrips} from '../../../redux/tripsRedux';
+import { getFilteredTrips } from '../../../redux/tripsRedux';
 import Trips from './Trips';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   trips: getFilteredTrips(state),
 });
 
