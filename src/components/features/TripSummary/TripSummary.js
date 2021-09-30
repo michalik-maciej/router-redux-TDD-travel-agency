@@ -1,8 +1,23 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import styles from './TripSummary.module.scss';
+import React from 'react';
 import { Col } from 'react-flexbox-grid';
+import { Link } from 'react-router-dom';
+
+import styles from './TripSummary.module.scss';
+
+function renderTags(tags) {
+  if (tags && tags.length) {
+    return (
+      <div className={styles.tags}>
+        {tags.map((tag) => (
+          <span className={styles.tag} key={tag.toString()}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    );
+  };
+}
 
 const TripSummary = ({ id, image, name, cost, days, tags }) => (
   <Col xs={12} sm={6} lg={4} className={styles.column}>
@@ -14,25 +29,19 @@ const TripSummary = ({ id, image, name, cost, days, tags }) => (
           <span>{days} days</span>
           <span>from {cost}</span>
         </div>
-        <div className={styles.tags}>
-          {tags.map((tag) => (
-            <span className={styles.tag} key={tag.toString()}>
-              {tag}
-            </span>
-          ))}
-        </div>
+        {renderTags(tags)}    
       </article>
     </Link>
   </Col>
 );
 
 TripSummary.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  image: PropTypes.string,
-  name: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   intro: PropTypes.string,
-  cost: PropTypes.string,
-  days: PropTypes.number,
+  cost: PropTypes.string.isRequired,
+  days: PropTypes.number.isRequired,
   tags: PropTypes.array,
 };
 
