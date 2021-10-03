@@ -17,6 +17,7 @@ import styles from './Trip.module.scss';
 const Trip = ({
   error,
   name,
+  id,
   image,
   cost,
   days,
@@ -95,7 +96,7 @@ const Trip = ({
           <Row>
             <Col xs={12}>
               <PageTitle text="Trip options" />
-              <OrderForm cost={cost} />
+              <OrderForm cost={cost} countryName={country.name} tripName={name} tripId={id} />
             </Col>
           </Row>
         </Grid>
@@ -110,6 +111,7 @@ Trip.propTypes = {
   description: PropTypes.string,
   error: PropTypes.bool,
   image: PropTypes.string,
+  id: PropTypes.string,
   intro: PropTypes.string,
   name: PropTypes.string,
 };
