@@ -16,7 +16,7 @@ function renderTags(tags) {
         ))}
       </div>
     );
-  };
+  }
 }
 
 const TripSummary = ({ id, image, name, cost, days, tags }) => (
@@ -29,7 +29,7 @@ const TripSummary = ({ id, image, name, cost, days, tags }) => (
           <span>{days} days</span>
           <span>from {cost}</span>
         </div>
-        {renderTags(tags)}    
+        {renderTags(tags)}
       </article>
     </Link>
   </Col>
