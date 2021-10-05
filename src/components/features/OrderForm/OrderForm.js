@@ -10,7 +10,7 @@ import Button from '../../common/Button/Button';
 import OrderSummary from './../OrderSummary/OrderSummary';
 import OrderOption from '../OrderOption/OrderOption';
 
-const sendOrder = (tripCost, countryName, options, tripId, tripName) => {  
+const sendOrder = (tripCost, countryName, options, tripId, tripName) => {
   const totalCost = formatPrice(calculateTotal(tripCost, options));
   const payload = {
     ...options,
@@ -32,21 +32,27 @@ const sendOrder = (tripCost, countryName, options, tripId, tripName) => {
   };
 
   fetch(url, fetchOptions)
-    .then(function(response){
+    .then(function (response) {
       return response.json();
-    }).then(function(parsedResponse){
+    })
+    .then(function (parsedResponse) {
       console.log('parsedResponse', parsedResponse);
     });
 };
 
 const validateOrderData = (props) => {
   if (props.options.name && props.options.contact) {
-    sendOrder(props.cost, props.countryName, props.options, props.tripId, props.tripName);
+    sendOrder(
+      props.cost,
+      props.countryName,
+      props.options,
+      props.tripId,
+      props.tripName
+    );
     window.alert(settings.popupMessages.orderConfirm);
+  } else {
+    window.alert(settings.popupMessages.orderIncomplete);
   }
-  else {
-    window.alert(settings.popupMessages.orderIncomplete);    
-  };
 };
 
 const OrderForm = (props) => (
@@ -64,7 +70,8 @@ const OrderForm = (props) => (
     <Col xs={12}>
       <OrderSummary options={props.options} cost={props.cost} />
     </Col>
-    <Button onClick={() => validateOrderData(props)}>Order now!</Button> {/* jak przekazać dane w formie obiektu? */}
+    <Button onClick={() => validateOrderData(props)}>Order now!</Button>{' '}
+    {/* jak przekazać dane w formie obiektu? */}
   </Row>
 );
 

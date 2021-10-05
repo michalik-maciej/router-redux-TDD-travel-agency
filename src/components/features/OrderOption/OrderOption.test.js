@@ -94,12 +94,12 @@ for (let type in optionTypes) {
           const checkboxWrapper = renderedSubcomponent.find('.checkboxes');
           expect(checkboxWrapper).toBeTruthy();
 
-          const labels = checkboxWrapper.find('.icon');          
+          const labels = checkboxWrapper.find('.icon');
           expect(labels.at(0).text()).toBe(
             `${mockProps.values[0].name}(${formatPrice(
               mockProps.values[0].price
             )})`
-          );              
+          );
           expect(labels.at(1).text()).toBe(
             `${mockProps.values[1].name}(${formatPrice(
               mockProps.values[1].price
@@ -107,31 +107,39 @@ for (let type in optionTypes) {
           );
 
           const checkboxes = checkboxWrapper.find('input');
-          checkboxes.forEach(node => {
+          checkboxes.forEach((node) => {
             expect(node.prop('type')).toBe('checkbox');
           });
           expect(checkboxes.at(0).prop('value')).toBe(mockProps.values[0].id);
-          expect(checkboxes.at(0).prop('checked')).toBe(mockPropsForType.checkboxes.currentValue == mockProps.values[0].id);
+          expect(checkboxes.at(0).prop('checked')).toBe(
+            mockPropsForType.checkboxes.currentValue == mockProps.values[0].id
+          );
 
           expect(checkboxes.at(1).prop('value')).toBe(mockProps.values[1].id);
-          expect(checkboxes.at(1).prop('checked')).toBe(mockPropsForType.checkboxes.currentValue == mockProps.values[1].id); // jak równocześnie iterować po node'ach i array'u?
+          expect(checkboxes.at(1).prop('checked')).toBe(
+            mockPropsForType.checkboxes.currentValue == mockProps.values[1].id
+          ); // jak równocześnie iterować po node'ach i array'u?
         });
 
-        it('should run setOrderOption function on change', () => {         
-          const testInput = renderedSubcomponent.findWhere(element => element.prop('value') === testValue);
+        it('should run setOrderOption function on change', () => {
+          const testInput = renderedSubcomponent.findWhere(
+            (element) => element.prop('value') === testValue
+          );
           testInput.simulate('change', { currentTarget: { checked: true } });
-          
+
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue] });  //WTF???????
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: [mockProps.currentValue, testValue],
+          }); //WTF???????
         });
         break;
       }
-      
+
       case 'date': {
         it('contains DatePicker', () => {
           const datePicker = renderedSubcomponent.find(DatePicker);
           expect(datePicker.length).toBe(1);
-          console.log(mockPropsForType.date.minDate);          
+          console.log(mockPropsForType.date.minDate);
         });
 
         it('should run setOrderOption function on change', () => {
@@ -139,7 +147,9 @@ for (let type in optionTypes) {
 
           datePicker.simulate('change', testValue);
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: testValue});
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValue,
+          });
         });
         break;
       }
@@ -171,16 +181,15 @@ for (let type in optionTypes) {
       }
 
       case 'icons': {
-        
         it('contains divComponent with structure divIcon > Icon', () => {
           const divComponent = renderedSubcomponent.find('.component');
           expect(divComponent.length).toBe(1);
-          
+
           const divIconNone = renderedSubcomponent.find('.icon').at(0);
           const IconNone = divIconNone.childAt(0);
           expect(divIconNone.text()).toBe(`<Icon />none`);
           expect(IconNone.prop('name')).toBe('times-circle');
-          
+
           const divIconActive = renderedSubcomponent.find('.iconActive');
           const IconActive = divIconActive.childAt(0);
           expect(divIconActive.text()).toBe(
@@ -189,7 +198,7 @@ for (let type in optionTypes) {
             )})`
           );
           expect(IconActive.prop('name')).toBe(mockProps.values[0].icon);
-              
+
           const divIcon = renderedSubcomponent.find('.icon').at(1);
           const Icon = divIcon.childAt(0);
           expect(divIcon.text()).toBe(
@@ -203,7 +212,9 @@ for (let type in optionTypes) {
         it('should run setOrderOption function on click', () => {
           renderedSubcomponent.find('.icon').at(1).simulate('click');
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith( {[mockProps.id]: testValue} );
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValue,
+          });
         });
 
         break;
@@ -212,21 +223,28 @@ for (let type in optionTypes) {
       case 'number': {
         it('contains input with correct props type, min, max and value', () => {
           expect(renderedSubcomponent.find('.inputSmall')).toBeTruthy();
-          expect(renderedSubcomponent.find('.inputSmall').text()).toBe(mockProps.price);
-          
+          expect(renderedSubcomponent.find('.inputSmall').text()).toBe(
+            mockProps.price
+          );
+
           const input = renderedSubcomponent.find('input');
           expect(input.prop('type')).toBe('number');
           expect(input.prop('max')).toBe(mockProps.limits.max);
           expect(input.prop('min')).toBe(mockProps.limits.min);
-          expect(input.prop('value')).toBe(mockPropsForType.number.currentValue);
+          expect(input.prop('value')).toBe(
+            mockPropsForType.number.currentValue
+          );
         });
 
         it('should run setOrderOption on change', () => {
-          renderedSubcomponent.find('input')
-            .simulate('change', { currentTarget: {value: testValueNumber} });
+          renderedSubcomponent
+            .find('input')
+            .simulate('change', { currentTarget: { value: testValueNumber } });
 
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber });
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValueNumber,
+          });
         });
         break;
       }
@@ -237,15 +255,20 @@ for (let type in optionTypes) {
 
           expect(input).toBeTruthy();
           expect(input.prop('type')).toBe('text');
-          expect(input.prop('placeholder')).toBe(mockPropsForType.text.placeholder);
+          expect(input.prop('placeholder')).toBe(
+            mockPropsForType.text.placeholder
+          );
         });
 
         it('should run setOrderOption on change', () => {
-          renderedSubcomponent.find('input')
-            .simulate('change', { currentTarget: {value: testValue} });
+          renderedSubcomponent
+            .find('input')
+            .simulate('change', { currentTarget: { value: testValue } });
 
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValue,
+          });
         });
         break;
       }
