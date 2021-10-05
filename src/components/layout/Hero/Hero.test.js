@@ -27,6 +27,14 @@ describe('Component Hero', () => {
     expect(component.find('.image').prop('src')).toEqual(expectedImage);
   });
 
+  it('should render HappyHourAd', () => {
+    const expectedTitle = 'Lorem ipsum';
+    const expectedImage = 'image.jpg';
+    const component = shallow(<Hero titleText={expectedTitle} imageSrc={expectedImage} />);
+  
+    expect(component.find('HappyHourAd').length).toEqual(1);
+  });
+
   it('renders correct classNames', () => {
     const mockVariants = 'small dummy';
     const component = shallow(
