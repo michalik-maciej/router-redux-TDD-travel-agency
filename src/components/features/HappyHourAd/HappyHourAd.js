@@ -33,7 +33,7 @@ class HappyHourAd extends React.Component {
   render() {
     let { description, title } = this.props;
     if (this.getCountdownTime() <= 23 * 60 * 60) {
-      description = formatTime(this.getCountdownTime() + '');
+      description = formatTime(this.getCountdownTime());
     }
 
     return (

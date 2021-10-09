@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { mockDate } from '../../../utils/mockDate';
 import HappyHourAd from './HappyHourAd';
 
 const select = {
@@ -37,20 +38,6 @@ describe('Component HappyHourAd', () => {
 });
 
 const trueDate = Date;
-const mockDate = (customDate) =>
-  class extends Date {
-    constructor(...args) {
-      if (args.length) {
-        super(...args);
-      } else {
-        super(customDate);
-      }
-      return this;
-    }
-    static now() {
-      return new Date(customDate).getTime();
-    }
-  };
 
 const checkDescriptionAtTime = (time, expectedDescription) => {
   it(`should show correct at ${time}`, () => {
