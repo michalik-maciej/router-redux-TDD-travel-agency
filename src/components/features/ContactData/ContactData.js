@@ -31,8 +31,7 @@ class ContactData extends React.Component {
         currentTime.getTime() > shiftLimits[shift].from &&
         currentTime.getTime() <= shiftLimits[shift].to
       ) {
-        const { ...personData } = this.props[shift].personData;
-        content = `${personData.name} ${personData.phoneNumber}`;
+        content = this.props[shift].personData.join(' ');
       }
     }
 
@@ -45,9 +44,6 @@ class ContactData extends React.Component {
 }
 
 ContactData.propTypes = {
-  /*   currentTime: PropTypes.string,
-  name: PropTypes.string,
-  phoneNumber: PropTypes.string, */
   night: PropTypes.object.isRequired,
 };
 
